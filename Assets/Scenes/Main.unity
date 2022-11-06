@@ -149,12 +149,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 14053620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40c128e7dbe26d4cbcdc9a70c305777, type: 3}
+  m_Script: {fileID: 11500000, guid: e1257d77cafcafe458fc41c58e364634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   theMusic: {fileID: 1450833976}
   startPlaying: 0
   theBS: {fileID: 545273046}
+  currentScore: 0
+  scorePerNote: 100
+  scorePerGoodNote: 125
+  scorePerPerfectNote: 150
+  scoreText: {fileID: 1791990394}
+  multiText: {fileID: 2046179001}
+  currentMultiplier: 0
+  multiplierTracker: 0
+  multiplierThresholds: 040000000800000010000000
 --- !u!4 &14053622
 Transform:
   m_ObjectHideFlags: 0
@@ -231,7 +240,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1bbda9210988dfd4db252a09838d254f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 74b56ae53bb5a1943ad3e1f24ec3b2b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -266,12 +275,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 42740288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a917470cae655e947b5b47053bf14be8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8278b010d701a6544a1f8821d28e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImage: {fileID: 21300000, guid: 1bbda9210988dfd4db252a09838d254f, type: 3}
-  pressedImage: {fileID: 21300000, guid: cacc39dd2a4e88a43aadeddd73e9b1e2, type: 3}
-  keyToPress: 273
+  defaultImage: {fileID: 21300000, guid: 74b56ae53bb5a1943ad3e1f24ec3b2b6, type: 3}
+  pressedImage: {fileID: 21300000, guid: e5ac920de9624d447b4394b834c64748, type: 3}
+  keyToPress: 0
 --- !u!50 &42740292
 Rigidbody2D:
   serializedVersion: 4
@@ -540,7 +549,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed2984e24d5df6f46a80ead6ad2964fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da0a7f64a9954b64ab84e1b111f33f54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -575,12 +584,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 335185279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a917470cae655e947b5b47053bf14be8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8278b010d701a6544a1f8821d28e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImage: {fileID: 21300000, guid: ed2984e24d5df6f46a80ead6ad2964fa, type: 3}
-  pressedImage: {fileID: 21300000, guid: 8f47ff751b3bdec48862adf0100c74fa, type: 3}
-  keyToPress: 274
+  defaultImage: {fileID: 21300000, guid: da0a7f64a9954b64ab84e1b111f33f54, type: 3}
+  pressedImage: {fileID: 21300000, guid: 603e30b3799585045aef33218d7009c7, type: 3}
+  keyToPress: 0
 --- !u!50 &335185283
 Rigidbody2D:
   serializedVersion: 4
@@ -703,7 +712,7 @@ SpriteRenderer:
   m_SortingLayerID: 732309285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60bfd072918779345aef76bf7e212b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 731869cb8363ca6489545d4dbd3574ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -739,11 +748,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 350442594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864a6c6cf9aee1047b78a254054570f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 91bf4167f5d395043a4663cf45b38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 276
+  hitEffect: {fileID: 5519322121024178961, guid: b4992bda76ea9084e9093d34344e4874, type: 3}
+  goodEffect: {fileID: 5597771682760456624, guid: f25f07d918e11854c8145151f4bcd9fc, type: 3}
+  perfectEffect: {fileID: 5396381700138705510, guid: 408157661121fc74e9041ee919ee9ec1, type: 3}
+  missEffect: {fileID: 314858680433271578, guid: 616ecdfe14e7b0e43b7e0dd5b0600459, type: 3}
 --- !u!1 &450328914
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +818,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ad187f74f2d0cc4499f39a0267b9eda8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f6f531586172ea44a3e017585149fc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -840,12 +853,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 450328914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a917470cae655e947b5b47053bf14be8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8278b010d701a6544a1f8821d28e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImage: {fileID: 21300000, guid: ad187f74f2d0cc4499f39a0267b9eda8, type: 3}
-  pressedImage: {fileID: 21300000, guid: 18bf226de2d59284e904c26430f659c9, type: 3}
-  keyToPress: 276
+  defaultImage: {fileID: 21300000, guid: 0f6f531586172ea44a3e017585149fc5, type: 3}
+  pressedImage: {fileID: 21300000, guid: 2ad9e5587dd12394a8078b2bd46d770b, type: 3}
+  keyToPress: 0
 --- !u!50 &450328918
 Rigidbody2D:
   serializedVersion: 4
@@ -1151,7 +1164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 545273044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add3b14805e80b148af85c1fafdbd6b5, type: 3}
+  m_Script: {fileID: 11500000, guid: e28322d6ed4816942911b88057174f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beatTempo: 126.4
@@ -1784,11 +1797,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1209979289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864a6c6cf9aee1047b78a254054570f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 91bf4167f5d395043a4663cf45b38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 273
+  hitEffect: {fileID: 5519322121024178961, guid: b4992bda76ea9084e9093d34344e4874, type: 3}
+  goodEffect: {fileID: 5597771682760456624, guid: f25f07d918e11854c8145151f4bcd9fc, type: 3}
+  perfectEffect: {fileID: 5396381700138705510, guid: 408157661121fc74e9041ee919ee9ec1, type: 3}
+  missEffect: {fileID: 314858680433271578, guid: 616ecdfe14e7b0e43b7e0dd5b0600459, type: 3}
 --- !u!212 &1209979293
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1830,7 +1847,7 @@ SpriteRenderer:
   m_SortingLayerID: 732309285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60bfd072918779345aef76bf7e212b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 731869cb8363ca6489545d4dbd3574ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2076,7 +2093,7 @@ SpriteRenderer:
   m_SortingLayerID: 732309285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60bfd072918779345aef76bf7e212b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 731869cb8363ca6489545d4dbd3574ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2112,11 +2129,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1426576744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864a6c6cf9aee1047b78a254054570f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 91bf4167f5d395043a4663cf45b38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 274
+  hitEffect: {fileID: 5519322121024178961, guid: b4992bda76ea9084e9093d34344e4874, type: 3}
+  goodEffect: {fileID: 5597771682760456624, guid: f25f07d918e11854c8145151f4bcd9fc, type: 3}
+  perfectEffect: {fileID: 5396381700138705510, guid: 408157661121fc74e9041ee919ee9ec1, type: 3}
+  missEffect: {fileID: 314858680433271578, guid: 616ecdfe14e7b0e43b7e0dd5b0600459, type: 3}
 --- !u!1 &1450833975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,7 +2165,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e3903f052f6e1c84385cd598b244e788, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e4b9f11c67cafcc4a87122b2bbe20929, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2343,7 +2364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1605572179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2556,11 +2577,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1685047029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864a6c6cf9aee1047b78a254054570f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 91bf4167f5d395043a4663cf45b38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 275
+  hitEffect: {fileID: 5519322121024178961, guid: b4992bda76ea9084e9093d34344e4874, type: 3}
+  goodEffect: {fileID: 5597771682760456624, guid: f25f07d918e11854c8145151f4bcd9fc, type: 3}
+  perfectEffect: {fileID: 5396381700138705510, guid: 408157661121fc74e9041ee919ee9ec1, type: 3}
+  missEffect: {fileID: 314858680433271578, guid: 616ecdfe14e7b0e43b7e0dd5b0600459, type: 3}
 --- !u!212 &1685047033
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2602,7 +2627,7 @@ SpriteRenderer:
   m_SortingLayerID: 732309285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60bfd072918779345aef76bf7e212b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 731869cb8363ca6489545d4dbd3574ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2648,7 +2673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645, y: -376}
+  m_AnchoredPosition: {x: -649, y: -248}
   m_SizeDelta: {x: 560.4, y: 164.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1791990394
@@ -2914,7 +2939,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c3c13b1f8baa5dd4a86d3dc186668178, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e88cc6dba8fdb474388b026c66158c13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2949,12 +2974,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1954822625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a917470cae655e947b5b47053bf14be8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8278b010d701a6544a1f8821d28e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultImage: {fileID: 21300000, guid: c3c13b1f8baa5dd4a86d3dc186668178, type: 3}
-  pressedImage: {fileID: 21300000, guid: 2d10ec486261df445b73774ff82f1b69, type: 3}
-  keyToPress: 275
+  defaultImage: {fileID: 21300000, guid: e88cc6dba8fdb474388b026c66158c13, type: 3}
+  pressedImage: {fileID: 21300000, guid: 423e2b24c15bd2e408b10fb901d9fca5, type: 3}
+  keyToPress: 0
 --- !u!50 &1954822629
 Rigidbody2D:
   serializedVersion: 4
@@ -3317,7 +3342,7 @@ SpriteRenderer:
   m_SortingLayerID: 732309285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60bfd072918779345aef76bf7e212b42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 731869cb8363ca6489545d4dbd3574ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3353,11 +3378,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2010556782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864a6c6cf9aee1047b78a254054570f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 91bf4167f5d395043a4663cf45b38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 276
+  hitEffect: {fileID: 5519322121024178961, guid: b4992bda76ea9084e9093d34344e4874, type: 3}
+  goodEffect: {fileID: 5597771682760456624, guid: f25f07d918e11854c8145151f4bcd9fc, type: 3}
+  perfectEffect: {fileID: 5396381700138705510, guid: 408157661121fc74e9041ee919ee9ec1, type: 3}
+  missEffect: {fileID: 314858680433271578, guid: 616ecdfe14e7b0e43b7e0dd5b0600459, type: 3}
 --- !u!1 &2030347559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645, y: -432}
+  m_AnchoredPosition: {x: -650, y: -302}
   m_SizeDelta: {x: 560.4, y: 164.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046179001

@@ -1,9 +1,13 @@
 fileFormatVersion: 2
-guid: 864a6c6cf9aee1047b78a254054570f7
+guid: 91bf4167f5d395043a4663cf45b38787
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hitEffect: {fileID: 5519322121024178961, guid: 129f8c98cad3d4d41b7918673c5f988f, type: 3}
+  - goodEffect: {fileID: 5597771682760456624, guid: 23a96833de483c048a52da9f976088fb, type: 3}
+  - perfectEffect: {fileID: 5396381700138705510, guid: 6292c7984380f5a4ca1eb8f1351dc1cb, type: 3}
+  - missEffect: {fileID: 314858680433271578, guid: 737c5b9ba10c0fe49961b1a6388cb569, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
