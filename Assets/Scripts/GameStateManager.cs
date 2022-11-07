@@ -19,4 +19,9 @@ public class GameStateManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
+
+    public void Pause()
+    {
+        SceneManager.LoadScene("PauseScreen");
+    }
 }
