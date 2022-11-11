@@ -24,24 +24,24 @@ public class NoteObject : MonoBehaviour
             {
                 gameObject.SetActive(false);
                // GameManager.instance.NoteHit();
-               if(Mathf.Abs(transform.position.y) > 0.25 )
-               {
-                   Debug.Log("Hit");
-                   GameManager.instance.NormalHit();
-                   Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
-               } 
-                else if(Mathf.Abs(transform.position.y) > 0.05f)
-               {
+                if(Mathf.Abs(transform.position.y) > 0.35 )
+                {
+                    Debug.Log("Hit");
+                    GameManager.instance.NormalHit();
+                    Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
+                } 
+                else if(Mathf.Abs(transform.position.y) > 0.1f)
+                {
                    Debug.Log("GoodHit");
                    GameManager.instance.GoodHit();
-                   Instantiate(hitEffect, transform.position, goodEffect.transform.rotation);
-               } 
+                   Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
+                } 
                 else
-               {
+                {
                    Debug.Log("Perfect");
                    GameManager.instance.PerfectHit();
-                   Instantiate(hitEffect, transform.position, perfectEffect.transform.rotation);
-               }
+                   Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
+                }
 
             }
         }
@@ -57,12 +57,16 @@ public class NoteObject : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.tag == "Activator")
+        if (gameObject.activeSelf)
         {
-            canBePressed = false;
+            if (other.tag == "Activator")
+            {
+                canBePressed = false;
 
-            GameManager.instance.NoteMissed();
-            Instantiate(hitEffect, transform.position, missEffect.transform.rotation);
+                Instantiate(missEffect, transform.position, missEffect.transform.rotation);
+
+                GameManager.instance.NoteMissed();
+            }
         }
     }
 

@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int currentScore;
-    public int scorePerNote = 100;
-    public int scorePerGoodNote = 125;
-    public int scorePerPerfectNote = 150; 
+    public int scorePerNote = 50;
+    public int scorePerGoodNote = 100;
+    public int scorePerPerfectNote = 300; 
 
     public Text scoreText;
     public Text multiText;
