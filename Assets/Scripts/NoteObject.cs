@@ -8,11 +8,20 @@ public class NoteObject : MonoBehaviour
     public bool canBePressed;
     public KeyCode keyToPress;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
-
+    public Conductor Conductor;
+    public Vector2 spawnPos;
+    public Vector2 removePos;
+    public float beatOfThisNote;
     // Start is called before the first frame update
+    public void initialize(float beat)
+    {
+        beatOfThisNote = beat;
+        this.transform.position = new Vector2(this.transform.position.x, 7f);
+    }
     void Start()
     {
-        
+        spawnPos = this.transform.position;
+        removePos = new Vector2(this.transform.position.x, -1.5f);
     }
 
     // Update is called once per frame
@@ -42,9 +51,12 @@ public class NoteObject : MonoBehaviour
                    GameManager.instance.PerfectHit();
                    Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
                 }
-
+                Destroy(gameObject);
             }
+
         }
+        this.transform.position = Vector2.Lerp(
+        spawnPos,removePos, (Conductor.beatsShownInAdvance - (beatOfThisNote - Conductor.songPositionInBeats)) / Conductor.beatsShownInAdvance);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +78,7 @@ public class NoteObject : MonoBehaviour
                 Instantiate(missEffect, transform.position, missEffect.transform.rotation);
 
                 GameManager.instance.NoteMissed();
+                Destroy(gameObject);
             }
         }
     }
