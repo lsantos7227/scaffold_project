@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f714b57b2885c46aa83ce1cd913357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 100
-  bpm: 100
+  songBpm: 120
+  bpm: 120
   nextIndex: 0
   secPerBeat: 0
   songPosition: 0
@@ -2666,14 +2666,14 @@ MonoBehaviour:
   startPlaying: 0
   theBS: {fileID: 0}
   currentScore: 0
-  scorePerNote: 50
-  scorePerGoodNote: 100
+  scorePerNote: 100
+  scorePerGoodNote: 200
   scorePerPerfectNote: 300
   scoreText: {fileID: 1787442468}
   multiText: {fileID: 543685534}
   currentMultiplier: 0
   multiplierTracker: 0
-  multiplierThresholds: 040000000800000010000000
+  multiplierThresholds: 04000000080000001000000020000000
 --- !u!4 &1583925183
 Transform:
   m_ObjectHideFlags: 0
