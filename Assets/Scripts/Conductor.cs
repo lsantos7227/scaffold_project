@@ -29,7 +29,7 @@ public class Conductor : MonoBehaviour
     public GameObject lane_3;
     public GameObject lane_4;
     [System.NonSerialized]
-    public float[,] notes = {{4,1,0,1,1},{4.5f,1,0,1,1},{5f,1,1,1,1},{5.5f,1,0,1,0},{6,1,0,1,0},{7,1,1,0,0},{9,0,0,1,1},{11f,0,0,1,1},{12f,0,0,0,1},{13f,1,0,0,0},{13.1f,0,1,0,0},{13.2f,0,0,1,0},{13.3f,0,0,0,1}};
+    public float[,] notes = {{4,1,0,1,1},{4.5f,1,0,1,1},{5f,1,1,1,1},{5.5f,1,0,1,0},{6,1,0,1,0},{7,1,1,0,0},{9,0,0,1,1},{11f,0,0,1,1},{12f,0,0,0,1},{13f,1,0,0,0},{13.1f,0,1,0,0},{13.2f,0,0,1,0},{13.3f,0,0,0,1},{14,0,1,1,0},{14.5f,0,1,1,0},{14.75f,1,0,0,0},{15f,0,1,0,0},{16f,1,1,1,1}};
     //an AudioSource attached to this GameObject that will play the music.
 public AudioSource musicSource;
     void Start()

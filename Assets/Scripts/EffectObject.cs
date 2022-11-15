@@ -18,7 +18,7 @@ public class EffectObject : MonoBehaviour
       
       if (transform.position.y < 4.5f)
       {
-          this.transform.position += new Vector3(0,0.001f,0);
+          this.transform.position += new Vector3(0,0.008f,0);
 
       }
       else
