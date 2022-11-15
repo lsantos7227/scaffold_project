@@ -3,7 +3,19 @@ guid: e1257d77cafcafe458fc41c58e364634
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - theMusic: {instanceID: 0}
+  - theBS: {instanceID: 0}
+  - scoreText: {instanceID: 0}
+  - multiText: {instanceID: 0}
+  - resultsScreen: {fileID: 5568819137684060511, guid: d245a28248806a845ba4b7cea7a4a836, type: 3}
+  - percentHitText: {fileID: 2198834624289815603, guid: e9826ff858fc5f24085c6f61bf19e858, type: 3}
+  - normalsText: {fileID: 7043805455235623308, guid: 613979b4ee260324681d590e2f7da9b0, type: 3}
+  - goodsText: {fileID: 3026711957820296201, guid: 05aedb5fbdb51e743b85e6c64e2819bc, type: 3}
+  - perfectsText: {fileID: 7818657482002167643, guid: dabc54c1d15f6c04e8174e4225b1cd16, type: 3}
+  - missesText: {fileID: 1166502373018566648, guid: b4ba673e1eb9169489d3552149fd52c1, type: 3}
+  - rankText: {fileID: 386404868462437354, guid: ab3bb58972849d240acd0eae7f49b02c, type: 3}
+  - finalScoreText: {fileID: 4266612154233655937, guid: fe5b5cad6711573468a828cae3b30327, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
