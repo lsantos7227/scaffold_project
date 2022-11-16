@@ -10,18 +10,16 @@ public class GameManager : MonoBehaviour
     public Conductor Conductor;
     public bool startPlaying;
 
-    public BeatScroller theBS;
-
     public static GameManager instance;
 
     public int currentScore;
     public int scorePerNote = 50;
     public int scorePerGoodNote = 100;
     public int scorePerPerfectNote = 300; 
+    public int scorePerLongNoteSection= 5;
 
     public Text scoreText;
     public Text multiText;
-
     public float totalNotes;
     public float normalHits;
     public float perfectHits;
@@ -124,10 +122,10 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         Debug.Log("Hit On Time");
-
+        multiplierTracker++;
         if (currentMultiplier - 1 < multiplierThresholds.Length)
         {
-            multiplierTracker++;
+            
 
             if (multiplierThresholds[currentMultiplier - 1] <= multiplierTracker)
             {
@@ -162,7 +160,11 @@ public class GameManager : MonoBehaviour
     NoteHit();
     perfectHits++;
     }
-
+    public void longNoteHit()
+    {
+        currentScore += scorePerLongNoteSection * currentMultiplier;
+        NoteHit();
+    }
     public void NoteMissed()
     {
         Debug.Log("Missed Note");
