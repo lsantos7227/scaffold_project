@@ -12,11 +12,12 @@ public class NoteObject : MonoBehaviour
     public Vector2 spawnPos;
     public Vector2 removePos;
     public float beatOfThisNote;
+    public bool Activated;
     // Start is called before the first frame update
     public void initialize(float beat)
     {
         beatOfThisNote = beat;
-        
+        Activated = true;
         
     }
     void Start()
@@ -34,7 +35,7 @@ public class NoteObject : MonoBehaviour
             {
                 gameObject.SetActive(false);
                // GameManager.instance.NoteHit();
-                if(Mathf.Abs(transform.position.y) > 0.6f)
+                if(Mathf.Abs(transform.position.y) > 0.80f)
                 {
                     Debug.Log("Hit");
                     GameManager.instance.NormalHit();
@@ -46,7 +47,7 @@ public class NoteObject : MonoBehaviour
                    GameManager.instance.GoodHit();
                    Instantiate(goodEffect, new Vector2(0,4), goodEffect.transform.rotation);
                 } 
-                else
+                else if (Mathf.Abs(transform.position.y) <= 0.35f)
                 {
                    Debug.Log("Perfect");
                    GameManager.instance.PerfectHit();
@@ -56,8 +57,11 @@ public class NoteObject : MonoBehaviour
             }
 
         }
-        this.transform.position = Vector2.Lerp(
-        spawnPos,removePos, (Conductor.beatsShownInAdvance - (beatOfThisNote - Conductor.songPositionInBeats)) / Conductor.beatsShownInAdvance);
+        if (Activated)
+        {
+            this.transform.position = Vector2.Lerp(
+            spawnPos,removePos, (Conductor.beatsShownInAdvance - (beatOfThisNote - Conductor.songPositionInBeats)) / Conductor.beatsShownInAdvance);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
