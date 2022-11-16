@@ -19,6 +19,7 @@ public class NoteObject : MonoBehaviour
     public float endOfThisNote;
     private float timeTillTick;
     private float beatTimeSpawn = 0;
+    public bool missed;
     // Start is called before the first frame update
     public void initialize(float beat, bool LongNote = false,float endNote = 0)
     {
@@ -27,6 +28,7 @@ public class NoteObject : MonoBehaviour
         Activated = true;
         isLongNote = LongNote;
         pressed = false;
+        missed = false;
         
     }
     void Start()
@@ -40,8 +42,8 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        beatTimeSpawn += Time.deltaTime * 6;
-        if(Input.GetKeyDown(keyToPress) && !pressed)
+        beatTimeSpawn += Time.deltaTime * 2;
+        if(Input.GetKeyDown(keyToPress) && !pressed && !missed)
         {
             if(canBePressed)
             {
@@ -81,7 +83,7 @@ public class NoteObject : MonoBehaviour
             }
 
         }
-        else if (!Input.GetKeyUp(keyToPress) && isLongNote && pressed && (Conductor.songPositionInBeats < endOfThisNote))
+        else if (!Input.GetKeyUp(keyToPress) && isLongNote && pressed && !missed && (Conductor.songPositionInBeats < endOfThisNote))
         {
             timeTillTick += Time.deltaTime;
             if ((timeTillTick * Conductor.secPerBeat * 1.0f) >= 0.05f)
@@ -90,7 +92,7 @@ public class NoteObject : MonoBehaviour
                 timeTillTick = 0;
             }
         }
-        else if (Input.GetKeyUp(keyToPress) && pressed && isLongNote && (Conductor.songPositionInBeats < endOfThisNote))
+        else if (Input.GetKeyUp(keyToPress) && pressed && !missed && isLongNote && (Conductor.songPositionInBeats < endOfThisNote))
         {
             gameObject.SetActive(false);
             if ((endOfThisNote - Conductor.songPositionInBeats) >= 0.5f)
@@ -120,7 +122,7 @@ public class NoteObject : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if ((Conductor.songPositionInBeats >= endOfThisNote) && isLongNote && pressed && !Input.GetKeyUp(keyToPress))
+        else if ((Conductor.songPositionInBeats >= endOfThisNote) && !missed && isLongNote && pressed && !Input.GetKeyUp(keyToPress))
         {
             gameObject.SetActive(false);
             Debug.Log("Perfect");
@@ -135,8 +137,19 @@ public class NoteObject : MonoBehaviour
         }
         if (isLongNote && (beatTimeSpawn + beatOfThisNote) < endOfThisNote)
         {
+            bool isEnd = false;
+            if ((beatTimeSpawn + Time.deltaTime * 2 + beatOfThisNote) >= endOfThisNote)
+            {
+                Debug.Log("End Note");
+                isEnd = true;
+            }
             LongNoteObject noteobject = ((GameObject) Instantiate(longNoteEffect, new Vector3(transform.position.x,9f,1f),longNoteEffect.transform.rotation)).GetComponent<LongNoteObject>();
-            noteobject.initialize((beatTimeSpawn + beatOfThisNote),this.GetComponent<NoteObject>());
+            noteobject.initialize((beatTimeSpawn + beatOfThisNote),this.GetComponent<NoteObject>(),isEnd);
+        }
+        if (missed && Conductor.songPositionInBeats >= endOfThisNote)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
@@ -154,10 +167,21 @@ public class NoteObject : MonoBehaviour
         {
             if (other.tag == "Activator")
             {
-                canBePressed = false;
-                Instantiate(missEffect, new Vector2(0,4), missEffect.transform.rotation);
-                GameManager.instance.NoteMissed();
-                Destroy(gameObject);
+                if (!isLongNote)
+                {
+                    canBePressed = false;
+                    Instantiate(missEffect, new Vector2(0,4), missEffect.transform.rotation);
+                    GameManager.instance.NoteMissed();
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    missed = true;
+                    Instantiate(missEffect, new Vector2(0,4), missEffect.transform.rotation);
+                    GameManager.instance.NoteMissed();
+                    GameManager.instance.NoteMissed();
+                    this.GetComponent<Renderer>().enabled = false;
+                }
             }
         }
     }
