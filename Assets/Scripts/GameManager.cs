@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour
     public void longNoteHit()
     {
         currentScore += scorePerLongNoteSection * currentMultiplier;
-        NoteHit();
     }
     public void NoteMissed()
     {

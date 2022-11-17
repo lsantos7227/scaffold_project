@@ -42,7 +42,7 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        beatTimeSpawn += Time.deltaTime * 2;
+        beatTimeSpawn += Time.deltaTime * 6;
         if(Input.GetKeyDown(keyToPress) && !pressed && !missed)
         {
             if(canBePressed)
@@ -138,12 +138,12 @@ public class NoteObject : MonoBehaviour
         if (isLongNote && (beatTimeSpawn + beatOfThisNote) < endOfThisNote)
         {
             bool isEnd = false;
-            if ((beatTimeSpawn + Time.deltaTime * 2 + beatOfThisNote) >= endOfThisNote)
+            if ((beatTimeSpawn + Time.deltaTime * 6f + beatOfThisNote) >= endOfThisNote)
             {
                 Debug.Log("End Note");
                 isEnd = true;
             }
-            LongNoteObject noteobject = ((GameObject) Instantiate(longNoteEffect, new Vector3(transform.position.x,9f,1f),longNoteEffect.transform.rotation)).GetComponent<LongNoteObject>();
+            LongNoteObject noteobject = ((GameObject) Instantiate(longNoteEffect, new Vector3(transform.position.x,10f,1f),longNoteEffect.transform.rotation)).GetComponent<LongNoteObject>();
             noteobject.initialize((beatTimeSpawn + beatOfThisNote),this.GetComponent<NoteObject>(),isEnd);
         }
         if (missed && Conductor.songPositionInBeats >= endOfThisNote)

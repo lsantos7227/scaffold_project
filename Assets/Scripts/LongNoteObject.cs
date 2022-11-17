@@ -6,7 +6,6 @@ public class LongNoteObject : MonoBehaviour
 {
     public bool canBePressed;
     public Sprite whileActivated,whileActivatedEnd;
-    public Sprite whileDeActivated,whileDeActivatedEnd;
     public KeyCode keyToPress;
     public Conductor Conductor;
     public Vector2 spawnPos;
@@ -31,19 +30,19 @@ public class LongNoteObject : MonoBehaviour
         else{
             note_Renderer.sprite = whileActivated;
         }
+        if (Activated && attachedNoteObject.missed)
+        {
+            Color objectColor = note_Renderer.color;
+            objectColor.a = 1f;
+            note_Renderer.material.color = objectColor;
+        }
     }
     void Start()
     {
         spawnPos = this.transform.position;
         removePos = new Vector2(this.transform.position.x, -1f);
         note_Renderer = GetComponent<SpriteRenderer>();
-        if (isEndNote)
-        {
-            note_Renderer.sprite = whileActivatedEnd;
-        }
-        else{
-            note_Renderer.sprite = whileActivated;
-        }
+        
         
         
     }
@@ -51,15 +50,19 @@ public class LongNoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isEndNote)
+        {
+            note_Renderer.sprite = whileActivatedEnd;
+        }
+        else{
+            note_Renderer.sprite = whileActivated;
+        }
         if((Input.GetKeyUp(keyToPress) && Activated && attachedNoteObject.pressed) || Activated && attachedNoteObject.missed)
         {
-            if (isEndNote){
-                note_Renderer.sprite = whileDeActivatedEnd;
-            }
-            else
-            {
-                note_Renderer.sprite = whileDeActivated;
-            }
+            Color objectColor = note_Renderer.color;
+            objectColor.a = 1f;
+            note_Renderer.material.color = objectColor;
+            
         }
         if (Activated)
         {
