@@ -11,12 +11,13 @@ public class Conductor : MonoBehaviour
     public float bpm;
     
     public int nextIndex;
+    public int nextIndexBPM;
     //The number of seconds for each song beat
     public float secPerBeat;
 
     //Current song position, in seconds
     public float songPosition;
-
+    private float oldSongPosition;
     //Current song position, in beats
     public float songPositionInBeats;
     public int beatsShownInAdvance;
@@ -29,7 +30,9 @@ public class Conductor : MonoBehaviour
     public GameObject lane_3;
     public GameObject lane_4;
     [System.NonSerialized]
-    public float[,] notes = {{4,1,0,1,1},{4.5f,1,0,1,1},{5f,1,1,1,1},{5.5f,1,0,1,0},{6,1,0,1,0},{7,1,1,0,0},{9,0,0,1,1},{11f,0,0,1,1},{12f,0,0,0,1},{13f,1,0,0,0},{13.1f,0,1,0,0},{13.2f,0,0,1,0},{13.3f,0,0,0,1},{14,0,1,1,0},{14.5f,0,1,1,0},{14.75f,1,0,0,0},{15f,0,1,0,0},{16f,1,1,1,1}};
+    public float[,] notes = {{4,1,2,0,0},{6,1,0,0,0},{8,2,0,0,0},{20,3,3,0,0},{109,1,0,0,0},{119,0,1,2,0},{121,1,0,0,0},{134,1,0,3,1},{136,1,0,0,0},{138,1,0,0,0}};
+    public int[] bpmChanges;
+    public float[] bpmChangeTimes;
     //an AudioSource attached to this GameObject that will play the music.
 public AudioSource musicSource;
     void Start()
@@ -51,41 +54,82 @@ public AudioSource musicSource;
     void Update()
     {
         //determine how many seconds since the song started
+        oldSongPosition = songPosition;
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
-
+        if (nextIndexBPM < bpmChanges.Length && (float)bpmChangeTimes[nextIndexBPM] <= songPosition)
+        {
+            Debug.Log("Changed BPM");
+            songBpm = bpmChanges[nextIndexBPM];
+            secPerBeat = 60f / songBpm;
+            nextIndexBPM++;
+        }
         //determine how many beats since the song started
-        songPositionInBeats = songPosition / secPerBeat;
+        songPositionInBeats += (songPosition-oldSongPosition) / secPerBeat;
         if (nextIndex < notes.GetLength(0) && notes[nextIndex,0] < songPositionInBeats + beatsShownInAdvance)
         {   
             if (notes[nextIndex,1] == 1)
             {
-            NoteObject noteobject = ((GameObject) Instantiate(lane_1, new Vector3(-1.5f,9f,1f),lane_1.transform.rotation)).GetComponent<NoteObject>();
+            NoteObject noteobject = ((GameObject) Instantiate(lane_1, new Vector3(-1.5f,10f,1f),lane_1.transform.rotation)).GetComponent<NoteObject>();
             noteobject.initialize(notes[nextIndex,0]);
-
+            
             //initialize the fields of the music note
+            }
+            else if (notes[nextIndex,1] == 2)
+            {
+                NoteObject noteobject = ((GameObject) Instantiate(lane_1, new Vector3(-1.5f,10f,1f),lane_1.transform.rotation)).GetComponent<NoteObject>();
+                noteobject.initialize(notes[nextIndex,0],true,find_nearest_three(1,nextIndex));
             }
             if (notes[nextIndex,2] == 1)
             {
-            NoteObject noteobject = ((GameObject) Instantiate(lane_2, new Vector3(-0.5f,9f,1f),lane_2.transform.rotation)).GetComponent<NoteObject>();
+            NoteObject noteobject = ((GameObject) Instantiate(lane_2, new Vector3(-0.5f,10f,1f),lane_2.transform.rotation)).GetComponent<NoteObject>();
             noteobject.initialize(notes[nextIndex,0]);
 
             //initialize the fields of the music note
+            }
+            else if (notes[nextIndex,2] == 2)
+            {
+                NoteObject noteobject = ((GameObject) Instantiate(lane_2, new Vector3(-0.5f,10f,1f),lane_2.transform.rotation)).GetComponent<NoteObject>();
+                noteobject.initialize(notes[nextIndex,0],true,find_nearest_three(2,nextIndex));
             }
             if (notes[nextIndex,3] == 1)
             {
-            NoteObject noteobject = ((GameObject) Instantiate(lane_3, new Vector3(0.5f,9f,1f),lane_3.transform.rotation)).GetComponent<NoteObject>();
+            NoteObject noteobject = ((GameObject) Instantiate(lane_3, new Vector3(0.5f,10f,1f),lane_3.transform.rotation)).GetComponent<NoteObject>();
             noteobject.initialize(notes[nextIndex,0]);
 
             //initialize the fields of the music note
             }
+            else if (notes[nextIndex,3] == 2)
+            {
+                NoteObject noteobject = ((GameObject) Instantiate(lane_3, new Vector3(0.5f,10f,1f),lane_3.transform.rotation)).GetComponent<NoteObject>();
+                noteobject.initialize(notes[nextIndex,0],true,find_nearest_three(3,nextIndex));
+            }
             if (notes[nextIndex,4] == 1)
             {
-            NoteObject noteobject = ((GameObject) Instantiate(lane_4, new Vector3(1.5f,9f,1f),lane_4.transform.rotation)).GetComponent<NoteObject>();
+            NoteObject noteobject = ((GameObject) Instantiate(lane_4, new Vector3(1.5f,10f,1f),lane_4.transform.rotation)).GetComponent<NoteObject>();
             noteobject.initialize(notes[nextIndex,0]);
             //initialize the fields of the music note
+            }
+            else if (notes[nextIndex,4] == 2)
+            {
+                NoteObject noteobject = ((GameObject) Instantiate(lane_4, new Vector3(1.5f,10f,1f),lane_4.transform.rotation)).GetComponent<NoteObject>();
+                noteobject.initialize(notes[nextIndex,0],true,find_nearest_three(4,nextIndex));
             }
             nextIndex++;
         }
     }
+    public float find_nearest_three(int column,int startingPosition)
+    {
+        int scroll = startingPosition;
+        while (scroll < notes.GetLength(0))
+        {
+            if (notes[scroll,column] == 3)
+            {
+                return notes[scroll,0];
+            }
+            scroll++;
+        }
+        return -1f;
+    }
+
     
 }
