@@ -29,8 +29,9 @@ public class Conductor : MonoBehaviour
     public GameObject lane_2;
     public GameObject lane_3;
     public GameObject lane_4;
+    public TextAsset beatMap;
     [System.NonSerialized]
-    public float[,] notes = {{4,1,2,0,0},{6,1,0,0,0},{8,2,0,0,0},{20,3,3,0,0},{109,1,0,0,0},{119,0,1,2,0},{121,1,0,0,0},{134,1,0,3,1},{136,1,0,0,0},{138,1,0,0,0}};
+    public float[,] notes;
     public int[] bpmChanges;
     public float[] bpmChangeTimes;
     //an AudioSource attached to this GameObject that will play the music.
@@ -47,6 +48,7 @@ public AudioSource musicSource;
         dspSongTime = (float)AudioSettings.dspTime;
         //Start the music
         //add a delay
+        notes = get_beat_map(beatMap);
         musicSource.Play();
     }
 
@@ -130,6 +132,60 @@ public AudioSource musicSource;
         }
         return -1f;
     }
-
+    public float[,] get_beat_map(TextAsset textfile){
+        var notelist = new List<List<float>>();
+        var internal_list= new List<float>();
+        string text = "";
+        if (textfile != null)
+        {
+            string[] lines = (textfile.text.Split('\n'));
+            foreach (string line in lines)
+            {
+                foreach (char c in line)
+                {
+                    if (c != ',')
+                        text += c;
+                    else
+                    {
+                        internal_list.Add(float.Parse(text));
+                        text = "";
+                    }
+                }
+                Debug.Log(text);
+                if (text.Length > 0)
+                {
+                    internal_list.Add(float.Parse(text));
+                }
+                text = "";
+                var copy = new List<float>();
+                foreach(float elt in internal_list)
+                {
+                    Debug.Log(elt);
+                    copy.Add(elt);
+                }
+                if (copy.Count > 0)
+                {
+                    notelist.Add(copy);
+                    internal_list = new List<float>();
+                }
+            }
+            float[,] returnArray = new float[notelist.Count,5];
+            for (int i = 0; i < notelist.Count; i++)
+            {
+                returnArray[i,0] = notelist[i][0];
+                returnArray[i,1] = notelist[i][1];
+                returnArray[i,2] = notelist[i][2];
+                returnArray[i,3] = notelist[i][3];
+                returnArray[i,4] = notelist[i][4];
+            }
+            
+            return returnArray;
+        }
+        else
+        {
+            return new float[,]{{0,0,0,0,0}};
+        }
+        
+    }
     
 }
