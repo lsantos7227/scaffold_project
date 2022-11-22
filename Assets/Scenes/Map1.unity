@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f714b57b2885c46aa83ce1cd913357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 120
+  songBpm: 125
   bpm: 120
   nextIndex: 0
   nextIndexBPM: 0
@@ -1510,10 +1510,14 @@ MonoBehaviour:
   lane_2: {fileID: 532048310}
   lane_3: {fileID: 1817154976}
   lane_4: {fileID: 710761882}
-  bpmChanges: 5a00000078000000
+  beatMap: {fileID: 4900000, guid: 5a787d19f3d816549aba1d6d063e9fc7, type: 3}
+  bpmChanges: 780000007d000000780000007d00000078000000
   bpmChangeTimes:
-  - 25
-  - 111
+  - 0.15
+  - 20
+  - 28
+  - 35
+  - 40
   musicSource: {fileID: 826882883}
 --- !u!4 &826882882
 Transform:
